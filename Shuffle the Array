@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> shuffle(vector<int>& nums, int n) {
+        int i=1;
+        int j=n;
+        for(int k=0;k<n;k++)
+        {
+           /* int temp= nums[2*n-j];
+            nums.erase(nums.end()-j+1);
+            nums.insert(nums.begin()+i, temp);
+            j--;
+            i+=2;*/
+            
+            nums.insert(nums.begin()+i, nums[nums.size()-j]);
+            j--;
+            i+=2;
+        }
+        for(int l=0;l<n;l++)
+        {
+            nums.pop_back();
+        }
+        return nums;
+    }
+};
