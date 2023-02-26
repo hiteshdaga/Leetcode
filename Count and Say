@@ -1,0 +1,55 @@
+class Solution{
+public:
+
+string transform(string s)
+{
+    char curr = s[0];
+    int curr_freq = 1;
+    string ans = "";
+    
+    for (int i = 1; i < s.length(); i++)
+    {
+        /* If current character is same as 
+            the last we increase the frequency by 1 */
+        if (s[i] == curr)   
+        {    
+            curr_freq++;
+        }
+        else
+        {
+            /* If new character is encountered then we add the last 
+            character's frequency followed by the last character
+            itself to the answer string*/
+            
+            ans += (char)(curr_freq + '0'); // adding Frequency to ans
+            ans += (char)(curr);    //adding the character to the answer
+            curr = s[i];
+            curr_freq = 1;
+        }
+    }
+    
+    /* when we exit the loop the last character is 
+    yet to be added to the string since the "else"
+    block won't be executed for the last character*/
+    
+    ans += (char)(curr_freq + '0');
+    ans += (char)(curr);
+    
+    return ans;
+}
+
+string countAndSay(int n) {
+    if (n == 1)
+        return "1";
+    
+    /*Recursively Calling for N-1 till we reach N = 1
+    And in each recursive call we call the function 
+    "transform" which transforms the string into 
+    a count and say form. Then we return the transformed 
+    string as our answer for that value of N*/
+    
+    string x = transform(countAndSay(n-1));
+    
+    return x;
+}
+};
